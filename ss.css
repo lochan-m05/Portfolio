@@ -1,0 +1,154 @@
+body{
+    background-image: url('data.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center; 
+}
+
+.container{
+    position: fixed;
+    margin-right: 4%;
+    margin-top: -5px;
+    top: 0;
+    right: 0;
+    padding: 30px;
+    z-index: 100;
+}
+
+.container a{
+    color:#FCF6F5;;
+    margin-left: 20px;
+    font-size: 40px; 
+}
+
+.container a:hover{
+    transition: background-color 0.3s;
+    color: #990011;
+}
+
+body{
+    font-family: '', sans-serif;
+    color: #990011;
+}
+
+header{
+    font-size: 35px;
+    margin-left: 3%;
+    margin-top: -4%;
+    padding: 9px;
+}
+
+header h1 span{
+    color:#FCF6F5;
+}
+
+.header1-text{
+    font-size: 25px;
+}
+
+.header1-text h1{
+    margin-bottom: 85px;
+    font-size: 65px;  
+    margin-left: 40px;
+    margin-top: 130px;
+}
+
+.header-text h1{
+    margin-bottom:80px;
+    font-size:65px;  
+    margin-left:3%;
+    margin-top:-4%;
+}
+
+.header-text h2{
+    margin-bottom:80px;
+    font-size:65px;  
+    margin-left:3%;
+    margin-top:-6%;
+}
+
+.header-text h1 span{
+    color:#FCF6F5;
+}
+
+.About-text{
+    margin-left: 1%;
+    margin-top: 32%;
+}
+
+.About-text h1{
+    font-size: 85px;
+    margin-left: 2%;
+    margin-top: -4%;
+    padding: 9px;
+}
+.About-text h1 span{
+    color: #FCF6F5;
+}
+
+.About-text span{
+    color: #FCF6F5;
+}
+
+.About-text p{
+    font-size: 40px;
+    margin-top: 75px;
+    margin-left: 2%;
+}
+
+.Skills-text h1{
+    font-size: 85px;
+    margin-left: 3%;
+    margin-top: 20%;
+    padding: 9px;
+}
+
+ .Skills-text h1 span{
+    color: #FCF6F5;
+ }
+ 
+.graph-container{
+    width: 60%; 
+    margin: 20px auto; 
+}
+
+.bar{
+    display:flex;
+    margin-left: -220px;
+    margin-bottom: 50px;
+    transition: background-color 0.3s;
+}
+
+.bar-label{
+    width: 100px; 
+    text-align: right;
+    padding-right: 5px; 
+    margin-bottom: 3%;
+    margin-top: 5% auto;
+}
+
+
+.bar-inner{
+    background-color: #FCF6F5; 
+    height: 30px; 
+}
+.graph-container:hover {
+    
+    text-align: right;
+    padding-right: 5px; 
+    margin-bottom: 3%;
+    margin-top: 5% auto;
+    transition: background-color 0.3s;
+  }
+
+.fake-text{
+    text-align: center;
+    font-size: 25px;
+    margin-left: 2%;
+    margin-top: 15%;
+    padding: 9px;
+}
+.fake-text p span{
+   color: #FCF6F5;
+}
