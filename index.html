@@ -7,59 +7,57 @@
     <meta name="description" content="Portfolio of Lochan Mahesh, Cybersecurity Student" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a class="skip-link" href="#home">Skip to content</a>
+    <a href="#home" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;">Skip to content</a>
 
     <header class="site-header">
       <nav class="nav">
         <ul class="nav__list">
-          <li><a href="#home" class="nav__link is-active">home</a></li>
-          <li><a href="#projects" class="nav__link">projects</a></li>
-          <li><a href="contact.html" class="nav__link">contact</a></li>
+          <li><a href="#home" class="nav__link is-active">Home</a></li>
+          <li><a href="#projects" class="nav__link">Projects</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
         </ul>
       </nav>
     </header>
 
     <main id="home" class="container">
       <section class="hero" aria-labelledby="hero-title">
-        <img class="hero__image" src="https://placehold.co/360x360/png" alt="Avatar" width="360" height="360" />
-
-        <h1 id="hero-title" class="hero__title">Lochan Mahesh</h1>
-        <p class="hero__subtitle">Cybersecurity Student</p>
-
-        
-
-        <ul class="skills" aria-label="Skills">
-          <li><span aria-hidden="true">🐍</span><span>Python</span></li>
-          <li><span aria-hidden="true">🧩</span><span>C/C++</span></li>
-          <li><span aria-hidden="true">🗄️</span><span>SQL</span></li>
-          <li><span aria-hidden="true">🛡️</span><span>Nessus</span></li>
-          <li><span aria-hidden="true">🧪</span><span>Burp Suite</span></li>
-          <li><span aria-hidden="true">⚡</span><span>OWASP ZAP</span></li>
-          <li><span aria-hidden="true">📡</span><span>Nmap</span></li>
-          <li><span aria-hidden="true">🔐</span><span>Network Security</span></li>
-          <li><span aria-hidden="true">🐳</span><span>Docker</span></li>
-          <li><span aria-hidden="true">🧰</span><span>Git</span></li>
-          <li><span aria-hidden="true">🦀</span><span>Rust (learning)</span></li>
-        </ul>
+        <div class="hero__header">
+          <img class="hero__image" src="https://github.com/lochan-m05.png" alt="Lochan Mahesh" width="80" height="80" />
+          <div class="hero__text">
+            <h1 id="hero-title">Lochan Mahesh</h1>
+            <p class="hero__subtitle">Cybersecurity Student</p>
+          </div>
+        </div>
 
         <p class="intro">
-          Dedicated cybersecurity student passionate about applying knowledge to solve real‑world security challenges. Experienced with vulnerability assessment tools like Nessus and Burp Suite, proficient in Python, and expanding skills in Rust to build secure applications. Actively seeking a cybersecurity internship or entry‑level role to contribute to impactful projects and learn from industry mentors.
+          Dedicated cybersecurity student passionate about applying knowledge to solve real‑world security challenges. Experienced with vulnerability assessment tools like Nessus and Burp Suite, proficient in Python, and expanding skills in Rust to build secure applications.
         </p>
 
-        
+        <ul class="skills" aria-label="Skills">
+          <li>Python</li>
+          <li>C/C++</li>
+          <li>SQL</li>
+          <li>Nessus</li>
+          <li>Burp Suite</li>
+          <li>OWASP ZAP</li>
+          <li>Nmap</li>
+          <li>Network Security</li>
+          <li>Docker</li>
+          <li>Git</li>
+          <li>Rust (learning)</li>
+        </ul>
       </section>
 
       <section id="projects" class="projects" aria-labelledby="projects-title" data-github-username="lochan-m05">
-        <h2 id="projects-title" class="section-title">Few Of My Projects</h2>
-        <div id="repo-grid" class="grid" aria-live="polite"></div>
-        <p id="repo-help" class="intro" style="text-align:center">Loading repositories…</p>
+        <h2 id="projects-title" class="section-title">Selected Projects</h2>
+        <div id="repo-grid" class="grid" aria-live="polite">
+          </div>
+        <p id="repo-help" style="text-align:center; color:#666; margin-top:20px;">Loading repositories...</p>
       </section>
-
-      
     </main>
 
     <footer class="site-footer">
@@ -67,7 +65,10 @@
     </footer>
 
     <script>
+      // 1. Dynamic Year
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      // 2. Navigation Active State
       const links = document.querySelectorAll('.nav__link[href^="#"]');
       function updateActive() {
         links.forEach(l => l.classList.remove('is-active'));
@@ -78,94 +79,107 @@
       window.addEventListener('hashchange', updateActive);
       updateActive();
 
-      // GitHub repos loader
+      // 3. GitHub Fetch Logic
       async function fetchAllRepos(username) {
         const all = [];
         let page = 1;
         while (true) {
-          const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=${page}`, {
-            headers: {
-              'Accept': 'application/vnd.github+json',
-              'X-GitHub-Api-Version': '2022-11-28'
-            }
-          });
-          if (!res.ok) throw new Error('GitHub API error');
-          const data = await res.json();
-          all.push(...data);
-          if (data.length < 100) break;
-          page += 1;
+          try {
+            const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=${page}&sort=updated`, {
+              headers: { 'Accept': 'application/vnd.github+json' }
+            });
+            if (!res.ok) break;
+            const data = await res.json();
+            if (!Array.isArray(data)) break;
+            all.push(...data);
+            if (data.length < 100) break;
+            page += 1;
+          } catch (e) {
+            console.error(e);
+            break;
+          }
         }
         return all;
       }
 
       function formatDate(iso) {
+        if (!iso) return '';
         const d = new Date(iso);
-        return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+        return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short' });
       }
 
       function renderRepos(repos) {
         const grid = document.getElementById('repo-grid');
         grid.innerHTML = '';
-        const VISIBLE_COUNT = 5;
-        repos
-          .sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at))
-          .slice(0, VISIBLE_COUNT)
-          .forEach(repo => {
-            const article = document.createElement('article');
-            article.className = 'card';
-            article.innerHTML = `
-              <h3 class="card__title">${repo.name}</h3>
-              <p class="card__desc">${repo.description ? repo.description : 'No description provided.'}</p>
-              <div class="card__meta">
-                <span>${repo.language || '—'}</span>
-                <span>Updated ${formatDate(repo.updated_at)}</span>
-                <a class="card__gh" href="${repo.html_url}" target="_blank" rel="noopener" aria-label="Open on GitHub"><svg class="icon"><use href="assets/icons.svg#github"></use></svg></a>
-              </div>
-            `;
-            grid.appendChild(article);
-          });
+        const VISIBLE_COUNT = 4; // Show top 4
+        
+        // Filter out forks if you want, currently showing all sorted by update
+        const sorted = repos.sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at));
+        const visible = sorted.slice(0, VISIBLE_COUNT);
+
+        visible.forEach(repo => {
+          const article = document.createElement('article');
+          article.className = 'card';
+          article.innerHTML = `
+            <h3 class="card__title">${repo.name}</h3>
+            <p class="card__desc">${repo.description ? repo.description : 'No description provided.'}</p>
+            <div class="card__meta">
+              <span>${repo.language || 'Code'}</span>
+              <span>${formatDate(repo.updated_at)}</span>
+              <a class="card__gh" href="${repo.html_url}" target="_blank" rel="noopener" aria-label="View on GitHub">
+                View
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 8v9"/></svg>
+              </a>
+            </div>
+          `;
+          grid.appendChild(article);
+        });
+
+        // Add Ghost Cards for aesthetics
+        if (sorted.length > VISIBLE_COUNT) {
+             const ghosts = sorted.slice(VISIBLE_COUNT, VISIBLE_COUNT + 2);
+             ghosts.forEach(repo => {
+                const ghost = document.createElement('article');
+                ghost.className = 'card card--ghost';
+                ghost.innerHTML = `
+                  <h3 class="card__title">${repo.name}</h3>
+                  <p class="card__desc">${repo.description || '...'}</p>
+                  <div class="card__meta"><span>${repo.language || '-'}</span></div>
+                `;
+                grid.appendChild(ghost);
+             });
+        }
       }
 
       (async () => {
         const section = document.getElementById('projects');
-        const username = section.getAttribute('data-github-username') || 'octocat';
+        const username = section.getAttribute('data-github-username') || 'lochan-m05';
+        const helpText = document.getElementById('repo-help');
+        
         try {
+          // Simple caching to save API calls on reload
           const cacheKey = `gh-repos-${username}`;
-          const cacheTsKey = `${cacheKey}-ts`;
-          const now = Date.now();
           const cached = localStorage.getItem(cacheKey);
-          const cachedTs = Number(localStorage.getItem(cacheTsKey) || 0);
-          let repos;
-          if (cached && now - cachedTs < 10 * 60 * 1000) {
-            repos = JSON.parse(cached);
-          } else {
-            repos = await fetchAllRepos(username);
-            localStorage.setItem(cacheKey, JSON.stringify(repos));
-            localStorage.setItem(cacheTsKey, String(now));
+          if (cached) {
+             renderRepos(JSON.parse(cached));
+             helpText.style.display = 'none';
           }
-          renderRepos(repos);
-          // Ghost cards for remaining repos: show names faded with top/bottom gradient
-          const hidden = repos
-            .sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at))
-            .slice(VISIBLE_COUNT, VISIBLE_COUNT + 4);
-          const grid = document.getElementById('repo-grid');
-          hidden.forEach(repo => {
-            const ghost = document.createElement('article');
-            ghost.className = 'card card--ghost';
-            ghost.innerHTML = `
-              <h3 class="card__title">${repo.name}</h3>
-              <p class="card__desc">${repo.description ? repo.description : '—'}</p>
-              <div class="card__meta"><span>${repo.language || '—'}</span><span>Updated ${formatDate(repo.updated_at)}</span></div>
-            `;
-            grid.appendChild(ghost);
-          });
-          document.getElementById('repo-help').textContent = '';
+          
+          // Always fetch fresh in background to update cache
+          const repos = await fetchAllRepos(username);
+          if (repos.length > 0) {
+            localStorage.setItem(cacheKey, JSON.stringify(repos));
+            renderRepos(repos);
+            helpText.style.display = 'none';
+          } else if (!cached) {
+            helpText.textContent = 'No public repositories found.';
+          }
         } catch (e) {
-          document.getElementById('repo-help').innerHTML = `Failed to load repositories. See all on <a href="https://github.com/${username}?tab=repositories" target="_blank" rel="noopener">GitHub</a>.`;
+          if (!localStorage.getItem(`gh-repos-${username}`)) {
+             helpText.innerHTML = `Failed to load. <a href="https://github.com/${username}" target="_blank">View on GitHub</a>`;
+          }
         }
       })();
     </script>
   </body>
-  </html>
-
-
+</html>
