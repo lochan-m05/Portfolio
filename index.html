@@ -4,163 +4,226 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Lochan Mahesh</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     
     <header class="site-header">
       <nav class="nav">
-        <ul class="nav__list">
-          <li><a href="#home" class="nav__link">Home</a></li>
-          <li><a href="#projects" class="nav__link">Projects</a></li>
-          <li><a href="contact.html" class="nav__link">Contact</a></li>
-        </ul>
+        <a href="#home" class="nav-logo">
+          <svg class="logo-svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Lochan</span>
+        </a>
+
+        <div class="nav-right">
+          <ul class="nav__list">
+            <li><a href="#home" class="nav__link active">Overview</a></li>
+            <li><a href="#projects" class="nav__link">Projects</a></li>
+            <li><a href="contact.html" class="nav__link">Contact</a></li>
+          </ul>
+
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+            <svg id="sun-icon" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg id="moon-icon" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
       </nav>
     </header>
 
     <main id="home" class="container">
       
       <section class="hero">
-        <img class="hero__image" src="https://github.com/lochan-m05.png" alt="Profile" />
-        
-        <h1 class="hero__title">Lochan Mahesh</h1>
-        <p class="hero__subtitle">Cybersecurity Student & Developer</p>
+        <h1 class="hero__title">
+          Security.<br>Systems. Code.
+        </h1>
+        <p class="hero__subtitle">
+          Cybersecurity student exploring the depths of low-level systems. 
+          Building secure infrastructure and breaking it to learn why.
+        </p>
 
-        <div class="tech-stack">
-          <div class="tech-item"><span>🐍</span> Python</div>
-          <div class="tech-item"><span>💻</span> C/C++</div>
-          <div class="tech-item"><span>🗄️</span> SQL</div>
-          <div class="tech-item"><span>🛡️</span> Nessus</div>
-          <div class="tech-item"><span>🐳</span> Docker</div>
-          <div class="tech-item"><span>🦀</span> Rust</div>
+        <div class="stack-scroll">
+          <div class="stack-item">
+            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="stack-icon" alt="Python" />
+            <span>Python</span>
+          </div>
+          
+          <div class="stack-item">
+            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/rust/rust-original.svg" class="stack-icon invert-on-dark" alt="Rust" />
+            <span>Rust</span>
+          </div>
+          
+          <div class="stack-item">
+            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" class="stack-icon" alt="Docker" />
+            <span>Docker</span>
+          </div>
+          
+          <div class="stack-item">
+            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bash/bash-original.svg" class="stack-icon invert-on-dark" alt="Bash" />
+            <span>Bash</span>
+          </div>
+          
+          <div class="stack-item">
+            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" class="stack-icon" alt="Linux" />
+            <span>Linux</span>
+          </div>
         </div>
 
-        <div style="max-width: 600px; margin: 0 auto; color: #555;">
-          <p>
-            I'm a cybersecurity student obsessed with low-level systems, network security, and solving CTFs. 
-            Currently building tools to break things so I can learn how to fix them.
-          </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Work</a>
+          <a href="https://github.com/lochan-m05" target="_blank" class="btn btn-secondary">GitHub</a>
         </div>
       </section>
 
       <section id="projects">
-        <h2 class="section-title">Selected Projects</h2>
-        
+        <h2 class="section-title">Projects</h2>
         <div id="repo-grid" class="grid">
           </div>
+        
+        <div id="debug-area" style="margin-top:50px; padding:20px; border:1px dashed #333; color:#666; font-size:0.8rem; display:none;">
+          <strong>Debug Info:</strong> <span id="debug-msg"></span>
+        </div>
       </section>
 
     </main>
 
-    <footer style="text-align:center; padding: 40px; color:#888; font-size:0.9rem;">
-      <p>&copy; <span id="year"></span> Lochan Mahesh</p>
+    <footer class="site-footer">
+      <p>MIT Licensed • Copyright © <span id="year"></span> Lochan Mahesh</p>
     </footer>
 
     <script>
-      // 1. Set Year
+      // 1. Theme Logic
+      const themeBtn = document.getElementById('theme-toggle');
+      const sunIcon = document.getElementById('sun-icon');
+      const moonIcon = document.getElementById('moon-icon');
+      const body = document.body;
+
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        body.setAttribute('data-theme', 'light');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+
+      themeBtn.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+          body.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'dark');
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          body.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+      });
+
+      // 2. Load Projects Logic
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // 2. Fetch Projects Logic
+      function truncateWords(str, limit) {
+        if (!str) return "No description provided.";
+        const words = str.split(/\s+/);
+        if (words.length > limit) {
+          return words.slice(0, limit).join(" ") + "...";
+        }
+        return str;
+      }
+
       async function loadProjects() {
         const username = 'lochan-m05'; 
         const grid = document.getElementById('repo-grid');
+        const debugArea = document.getElementById('debug-area');
+        const debugMsg = document.getElementById('debug-msg');
         
-        // --- CONFIGURATION: YOUR PINNED REPOS ---
-        // exact names of the repos you want to show (case-sensitive)
         const pinnedRepoNames = [
-          "instagrambot",
-          "Everything-Blog",
-          "youtube-shorts-automation",
-          "DownloadsManeger",
-          "yahoo-finance-api",
-          "NewsLetterBot",
-          "twitter-bot",
-          "promptly-plugin",
-          "PodcastScraper"
+          "Backup_script",
+          "career-guidance",
+          "guessing_game",
+          "Lyrics_grabber",
+          "Network_Scanner",
+          "Server-Watchdog"
         ];
 
-        // Show Skeleton Loading
         grid.innerHTML = '';
         for(let i=0; i<6; i++) {
           grid.innerHTML += `
-            <div class="card loading">
-              <div class="skeleton s-title"></div>
-              <div class="skeleton s-desc"></div>
-              <div class="skeleton s-desc-2"></div>
-            </div>
-          `;
+            <div class="card" style="opacity:0.5; pointer-events:none;">
+              <div class="card-icon" style="background:var(--gray-50); border:none;"></div>
+              <div style="height:20px; width:60%; background:var(--gray-50); margin-bottom:10px; border-radius:4px;"></div>
+              <div style="height:14px; width:90%; background:var(--gray-50); border-radius:4px;"></div>
+            </div>`;
         }
 
         try {
-          // Fetch up to 100 repos to ensure we find the pinned ones
           const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`);
-          
-          if (!res.ok) {
-            if(res.status === 403) throw new Error('Rate limit exceeded');
-            throw new Error('GitHub API error');
-          }
-          
+          if (!res.ok) throw new Error(`GitHub API Error: ${res.status}`);
           const allRepos = await res.json();
-          
-          // --- FILTERING LOGIC ---
-          // Keep only the repos that are in your 'pinnedRepoNames' list
-          const pinnedRepos = allRepos.filter(repo => 
-            pinnedRepoNames.includes(repo.name)
+
+          let displayRepos = allRepos.filter(repo => 
+            pinnedRepoNames.some(name => name.toLowerCase() === repo.name.toLowerCase())
           );
 
-          // Sort them to match the order you listed them in 'pinnedRepoNames'
-          pinnedRepos.sort((a, b) => {
-            return pinnedRepoNames.indexOf(a.name) - pinnedRepoNames.indexOf(b.name);
-          });
-
-          // Clear Skeletons
-          grid.innerHTML = '';
-
-          // Render Cards
-          if (pinnedRepos.length === 0) {
-            grid.innerHTML = '<p style="text-align:center; width:100%;">No pinned repositories found. Check your spellings in the code!</p>';
-            return;
+          if (displayRepos.length === 0) {
+            displayRepos = allRepos.slice(0, 6);
+            debugArea.style.display = 'block';
+            debugMsg.innerHTML = `Could not match specific pinned projects. Showing recent.<br>Found: ${allRepos.map(r => r.name).join(', ')}`;
+          } else {
+            displayRepos.sort((a, b) => {
+               const indexA = pinnedRepoNames.findIndex(n => n.toLowerCase() === a.name.toLowerCase());
+               const indexB = pinnedRepoNames.findIndex(n => n.toLowerCase() === b.name.toLowerCase());
+               return indexA - indexB;
+            });
           }
 
-          pinnedRepos.forEach(repo => {
+          grid.innerHTML = '';
+          displayRepos.forEach(repo => {
             const article = document.createElement('a');
             article.href = repo.html_url;
             article.target = "_blank";
             article.className = 'card';
             
-            // Language Colors
             const langColors = {
-              'Python': '#3572A5',
-              'JavaScript': '#f1e05a',
-              'HTML': '#e34c26',
-              'CSS': '#563d7c',
-              'Rust': '#dea584',
-              'C++': '#f34b7d',
-              'Dart': '#00B4AB'
+              'Python': '#3572A5', 'JavaScript': '#f1e05a', 'HTML': '#e34c26', 
+              'CSS': '#563d7c', 'Rust': '#000', 'C++': '#f34b7d', 'Shell': '#89e051'
             };
-            const langColor = langColors[repo.language] || '#ccc';
-            const lang = repo.language || 'Code';
+            const langColor = langColors[repo.language] || '#666';
 
             article.innerHTML = `
               <div class="card-header">
-                <svg class="folder-icon" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-                <h3 class="card__title">${repo.name}</h3>
-              </div>
-              
-              <p class="card__desc">${repo.description || "No description provided."}</p>
-              
-              <div class="card__meta">
-                <div class="meta-item">
-                  <span class="lang-dot" style="background-color: ${langColor}"></span>
-                  <span>${lang}</span>
+                <div class="card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                  </svg>
                 </div>
-                ${repo.stargazers_count > 0 ? `
-                <div class="meta-item">
-                  <span style="font-size:12px">★</span> ${repo.stargazers_count}
-                </div>` : ''}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.5">
+                  <path d="M7 17l9.2-9.2M17 8v9"/>
+                </svg>
+              </div>
+              <h3 class="card__title">${repo.name}</h3>
+              <p class="card__desc">${truncateWords(repo.description, 20)}</p>
+              <div class="card__meta">
+                <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${langColor}; border:1px solid rgba(0,0,0,0.1);"></span>
+                ${repo.language || 'Code'}
               </div>
             `;
             grid.appendChild(article);
@@ -168,10 +231,9 @@
 
         } catch (error) {
           console.error(error);
-          grid.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:#ef4444;">
-            Unable to load projects (${error.message}). <br>
-            <a href="https://github.com/${username}" target="_blank" style="color:#2563EB; text-decoration:underline;">View my GitHub Profile</a>
-          </p>`;
+          grid.innerHTML = `<div style="grid-column:1/-1; padding:20px; border:1px solid var(--gray-100); color:red;">
+            Failed to load projects.
+          </div>`;
         }
       }
 
