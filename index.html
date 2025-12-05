@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    
     <header class="site-header">
-      <nav>
+      <nav class="nav">
         <ul class="nav__list">
-          <li><a href="#home" class="nav__link">home</a></li>
-          <li><a href="#projects" class="nav__link">blog</a></li> <li><a href="contact.html" class="nav__link">contact</a></li>
+          <li><a href="#home" class="nav__link">Home</a></li>
+          <li><a href="#projects" class="nav__link">Projects</a></li>
+          <li><a href="contact.html" class="nav__link">Contact</a></li>
         </ul>
       </nav>
     </header>
@@ -22,103 +24,133 @@
     <main id="home" class="container">
       
       <section class="hero">
-        <img class="hero__image" src="https://placehold.co/400x400/222/fff?text=LM" alt="Avatar" />
-        
+        <img class="hero__image" src="https://github.com/lochan-m05.png" alt="Profile" />
         <h1 class="hero__title">Lochan Mahesh</h1>
-        <p class="hero__subtitle">Cybersecurity Student</p>
+        <p class="hero__subtitle">Cybersecurity Student & Developer</p>
 
         <div class="tech-stack">
-          <div class="tech-item"><span class="icon">🐍</span> Python</div>
-          <div class="tech-item"><span class="icon">💻</span> C/C++</div>
-          <div class="tech-item"><span class="icon">🗄️</span> SQL</div>
-          <div class="tech-item"><span class="icon">🛡️</span> Nessus</div>
-          <div class="tech-item"><span class="icon">🐳</span> Docker</div>
-          <div class="tech-item"><span class="icon">🦀</span> Rust</div>
+          <div class="tech-item"><span>🐍</span> Python</div>
+          <div class="tech-item"><span>💻</span> C/C++</div>
+          <div class="tech-item"><span>🗄️</span> SQL</div>
+          <div class="tech-item"><span>🛡️</span> Nessus</div>
+          <div class="tech-item"><span>🐳</span> Docker</div>
+          <div class="tech-item"><span>🦀</span> Rust</div>
         </div>
 
-        <p class="bio">
-          I'm a cybersecurity student who's all about low-level systems, network security, and solving CTFs. 
-          I'm on the lookout for a cool internship where I can throw my skills into the ring.
-          I'm all about using tech to tackle tricky security problems and build robust solutions. 
-          Let's break something 
-        </p>
+        <div style="max-width: 600px; margin: 0 auto; color: #555;">
+          <p>
+            I'm a cybersecurity student obsessed with low-level systems, network security, and solving CTFs. 
+            Currently building tools to break things so I can learn how to fix them.
+          </p>
+        </div>
       </section>
-      
-<section id="projects">
-  <h2 class="section-title">Few Of My Projects</h2>
-  
-  <div id="repo-grid" class="masonry-grid">
-     </div>
-  
-  <p id="loading-text" style="text-align:center; color:#888;">Fetching projects...</p>
-</section>
-  <script>
+
+      <section id="projects">
+        <h2 class="section-title">Selected Projects</h2>
+        
+        <div id="repo-grid" class="grid">
+          </div>
+      </section>
+
+    </main>
+
+    <footer style="text-align:center; padding: 40px; color:#888; font-size:0.9rem;">
+      <p>&copy; <span id="year"></span> Lochan Mahesh</p>
+    </footer>
+
+    <script>
+      // 1. Set Year
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Helper to format date like "2024-07-25"
-      function formatDate(isoString) {
-        if (!isoString) return '';
-        return isoString.split('T')[0]; 
-      }
-
-      async function fetchRepos() {
+      // 2. Fetch Projects Logic
+      async function loadProjects() {
         const username = 'lochan-m05'; 
         const grid = document.getElementById('repo-grid');
-        const loading = document.getElementById('loading-text');
+        
+        // --- STEP 1: Show Skeleton Loading State ---
+        // This ensures the user sees something immediately
+        grid.innerHTML = '';
+        for(let i=0; i<6; i++) {
+          grid.innerHTML += `
+            <div class="card loading">
+              <div class="skeleton s-title"></div>
+              <div class="skeleton s-desc"></div>
+              <div class="skeleton s-desc-2"></div>
+            </div>
+          `;
+        }
 
         try {
+          // --- STEP 2: Fetch Data ---
+          // Added 'sort=pushed' to get your latest work
           const res = await fetch(`https://api.github.com/users/${username}/repos?sort=pushed&per_page=12`);
-          if (!res.ok) throw new Error('GitHub API Error');
+          
+          if (!res.ok) {
+            if(res.status === 403) throw new Error('Rate limit exceeded');
+            throw new Error('GitHub API error');
+          }
+          
           const repos = await res.json();
           
-          loading.style.display = 'none';
-          grid.innerHTML = ''; // Clear loading text
+          // Clear Skeletons
+          grid.innerHTML = '';
 
-          // 1. Sort by last updated
-          repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+          // Filter out forks if you want (optional: remove !r.fork to show everything)
+          // const filtered = repos.filter(r => !r.fork); 
+          // Currently showing all sorted by update time
+          const sorted = repos.sort((a,b) => new Date(b.pushed_at) - new Date(a.pushed_at));
 
-          // 2. Build Cards
-          repos.forEach(repo => {
-            const card = document.createElement('article');
-            card.className = 'card';
+          // --- STEP 3: Render Real Cards ---
+          sorted.forEach(repo => {
+            const article = document.createElement('a');
+            article.href = repo.html_url;
+            article.target = "_blank";
+            article.className = 'card';
             
-            // Determine dot color based on language (optional visual touch)
-            let dotColor = '#ccc';
+            // Language Color Map
+            const langColors = {
+              'Python': '#3572A5',
+              'JavaScript': '#f1e05a',
+              'HTML': '#e34c26',
+              'CSS': '#563d7c',
+              'Rust': '#dea584',
+              'C++': '#f34b7d'
+            };
+            const langColor = langColors[repo.language] || '#ccc';
             const lang = repo.language || 'Code';
-            if (lang === 'Python') dotColor = '#3572A5';
-            if (lang === 'JavaScript') dotColor = '#f1e05a';
-            if (lang === 'HTML') dotColor = '#e34c26';
-            if (lang === 'CSS') dotColor = '#563d7c';
 
-            card.innerHTML = `
-              <a href="${repo.html_url}" target="_blank" style="text-decoration:none; color:inherit; height:100%; display:flex; flex-direction:column;">
+            article.innerHTML = `
+              <div class="card-header">
+                <svg class="folder-icon" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
                 <h3 class="card__title">${repo.name}</h3>
-                <p class="card__desc">${repo.description || "No description provided."}</p>
-                
-                <div class="card__meta">
-                  <div class="meta-left">
-                    <span class="dot" style="background-color: ${dotColor}"></span>
-                    <span>${lang}</span>
-                  </div>
-                  
-                  <div class="meta-right">
-                    <span>Updated ${formatDate(repo.updated_at)}</span>
-                    <svg class="gh-icon" viewBox="0 0 16 16">
-                      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                    </svg>
-                  </div>
+              </div>
+              
+              <p class="card__desc">${repo.description || "No description provided."}</p>
+              
+              <div class="card__meta">
+                <div class="meta-item">
+                  <span class="lang-dot" style="background-color: ${langColor}"></span>
+                  <span>${lang}</span>
                 </div>
-              </a>
+                ${repo.stargazers_count > 0 ? `
+                <div class="meta-item">
+                  <span style="font-size:12px">★</span> ${repo.stargazers_count}
+                </div>` : ''}
+              </div>
             `;
-            grid.appendChild(card);
+            grid.appendChild(article);
           });
 
         } catch (error) {
-          loading.textContent = 'Could not load projects from GitHub.';
+          console.error(error);
+          grid.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:#ef4444;">
+            Unable to load projects (${error.message}). <br>
+            <a href="https://github.com/${username}" target="_blank" style="color:#2563EB; text-decoration:underline;">View my GitHub Profile</a>
+          </p>`;
         }
       }
 
-      fetchRepos();
+      loadProjects();
     </script>
   </body>
 </html>
