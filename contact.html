@@ -3,59 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Contact — Lochan Mahesh</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
+    <title>Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <nav class="nav">
+      <nav>
         <ul class="nav__list">
-          <li><a href="index.html" class="nav__link">Home</a></li>
-          <li><a href="index.html#projects" class="nav__link">Projects</a></li>
-          <li><a href="contact.html" class="nav__link is-active">Contact</a></li>
+          <li><a href="index.html" class="nav__link">home</a></li>
+          <li><a href="index.html#projects" class="nav__link">blog</a></li>
+          <li><a href="contact.html" class="nav__link">contact</a></li>
         </ul>
       </nav>
     </header>
 
-    <main class="container">
-      <div class="contact-wrapper">
-        <img class="contact-hero" src="https://placekitten.com/500/300" alt="Fun graphic" />
-        <h1 style="margin-bottom: 1rem;">Say Hello! 👋</h1>
-        <p class="intro" style="margin: 0 auto;">
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-        </p>
-        
-        <ul class="contact-socials" aria-label="Contact links">
-          <li>
-            <a href="https://github.com/lochan-m05" target="_blank" rel="noopener" aria-label="GitHub">
-              <svg class="icon"><use href="assets/icons.svg#github"></use></svg>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/lochan-mahesh-b3b7342b6/" target="_blank" rel="noopener" aria-label="LinkedIn">
-              <svg class="icon"><use href="assets/icons.svg#linkedin"></use></svg>
-            </a>
-          </li>
-          <li>
-            <a href="https://x.com/Lochan_m05" target="_blank" rel="noopener" aria-label="Twitter/X">
-              <svg class="icon"><use href="assets/icons.svg#twitter"></use></svg>
-            </a>
-          </li>
-          <li>
-            <a href="https://discord.gg/BYPHCC4m" target="_blank" rel="noopener" aria-label="Discord">
-              <svg class="icon"><use href="assets/icons.svg#discord"></use></svg>
-            </a>
-          </li>
-        </ul>
+    <main class="container" style="text-align:center; max-width:600px; margin-top:40px;">
+      <h1 class="hero__title">Contact Me</h1>
+      <p class="bio" style="margin-bottom: 40px;">
+        Feel free to reach out on any of these platforms.
+      </p>
+      
+      <div style="display:flex; justify-content:center; gap:20px;">
+        <a href="https://github.com/lochan-m05" class="nav__link">GitHub</a>
+        <a href="https://linkedin.com" class="nav__link">LinkedIn</a>
+        <a href="https://x.com" class="nav__link">Twitter/X</a>
       </div>
     </main>
-
-    <footer class="site-footer">
-      <p>© <span id="year"></span> Lochan Mahesh</p>
-    </footer>
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
   </body>
 </html>
