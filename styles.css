@@ -1,10 +1,12 @@
 :root {
-  --bg: #ffffff;
-  --text-main: #111827;       /* Nearly black for titles */
-  --text-muted: #6b7280;      /* Gray for descriptions */
-  --border: #e5e7eb;          /* Tailwind gray-200 */
-  --card-bg: #ffffff;
-  --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* Clean, crisp color palette */
+  --bg: #FAFAFA;          /* Very slight off-white for depth */
+  --card-bg: #FFFFFF;
+  --text-primary: #171717;
+  --text-secondary: #737373;
+  --border: #E5E5E5;
+  --accent: #2563EB;      /* Professional Blue for interactive elements */
+  --hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
@@ -14,170 +16,213 @@ body {
   margin: 0;
   font-family: var(--font-main);
   background: var(--bg);
-  color: var(--text-main);
-  line-height: 1.5;
+  color: var(--text-primary);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 /* --- Navigation --- */
 .site-header {
-  padding: 1.5rem 0;
-  text-align: center;
-  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 0;
 }
+
 .nav__list {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.5rem;
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 .nav__link {
   text-decoration: none;
-  color: var(--text-main);
+  color: var(--text-secondary);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  transition: color 0.2s;
 }
-.nav__link:hover { color: #000; text-decoration: underline; }
+
+.nav__link:hover { color: var(--text-primary); }
 
 /* --- Layout --- */
 .container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 20px 80px;
+  padding: 60px 20px 100px;
 }
 
 /* --- Hero Section --- */
 .hero {
   text-align: center;
-  margin-bottom: 5rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 80px;
 }
+
 .hero__image {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  margin-bottom: 24px;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 1px var(--border);
 }
+
 .hero__title {
-  font-size: 2.25rem;
+  font-size: 3rem;
   font-weight: 800;
-  margin: 0 0 0.5rem;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.04em;
+  margin: 0 0 12px;
+  color: var(--text-primary);
 }
+
 .hero__subtitle {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 1.1rem;
-  margin: 0 0 2rem;
+  margin-bottom: 32px;
 }
-/* Tech Stack Row */
+
+/* --- Tech Stack (Pill Design) --- */
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.tech-item {
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
   font-weight: 600;
-  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s;
 }
-.tech-item { display: flex; align-items: center; gap: 6px; }
 
-/* --- Masonry Project Grid --- */
+.tech-item:hover { transform: translateY(-2px); border-color: var(--text-secondary); }
+
+/* --- Projects Grid --- */
 .section-title {
-  text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #6b7280; /* Gray title as seen in screenshot */
-  margin-bottom: 3rem;
+  margin-bottom: 30px;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* The Masonry Columns */
-.masonry-grid {
-  column-count: 1;
-  column-gap: 1.5rem;
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
 }
-@media (min-width: 768px) { .masonry-grid { column-count: 2; } }
-@media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
 
-/* The Card Style */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* --- The Unique Card Design --- */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 0.75rem; /* 12px radius */
-  padding: 1.5rem;
-  margin-bottom: 1.5rem; /* Bottom space for masonry flow */
-  break-inside: avoid;   /* Prevents cutting cards in half */
-  
-  /* The "Effect" */
-  transition: all 0.2s ease;
-  position: relative;
+  border-radius: 12px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  text-decoration: none; /* For the whole card link */
+  color: inherit;
+  height: 100%;
 }
 
-/* Hover Effect: Lift up + Shadow */
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--hover-shadow);
-  border-color: #d1d5db;
+  border-color: #d4d4d4;
 }
 
+/* Card Header: Icon + Title */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.folder-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-secondary); /* Default gray */
+  transition: fill 0.2s;
+}
+
+.card:hover .folder-icon { fill: var(--accent); } /* Blue on hover */
+
 .card__title {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin: 0 0 0.75rem;
-  color: #000;
-  line-height: 1.3;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  margin-left: 12px;
 }
 
 .card__desc {
   font-size: 0.95rem;
-  color: var(--text-muted);
-  margin: 0 0 2rem; /* Spacing before footer */
+  color: var(--text-secondary);
+  margin: 0 0 24px;
   line-height: 1.6;
+  
+  /* Truncate text after 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Footer layout: Language ... Date ... Icon */
+/* Card Footer */
 .card__meta {
   margin-top: auto;
-  padding-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 0.8rem;
-  color: #9ca3af; /* Light gray text */
+  color: var(--text-secondary);
+  padding-top: 16px;
+  border-top: 1px solid #f3f3f3;
 }
 
-.meta-left {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  color: var(--text-muted);
-}
-.dot {
-  width: 6px;
-  height: 6px;
-  background-color: #eab308; /* Yellow dot for Python default */
-  border-radius: 50%;
-}
+.meta-item { display: flex; align-items: center; gap: 6px; }
+.lang-dot { width: 8px; height: 8px; border-radius: 50%; }
 
-.meta-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* Skeleton Loading Animation */
+.skeleton {
+  background: #f0f0f0;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite linear;
+  background: linear-gradient(to right, #f0f0f0 4%, #f7f7f7 25%, #f0f0f0 36%);
+  background-size: 1000px 100%;
 }
+@keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
 
-.gh-icon {
-  color: var(--text-muted);
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-  transition: color 0.2s;
-}
-.card:hover .gh-icon { color: #000; }
+.card.loading { border: 1px solid transparent; box-shadow: none; pointer-events: none; }
+.s-title { height: 20px; width: 60%; margin-bottom: 1rem; }
+.s-desc { height: 14px; width: 100%; margin-bottom: 8px; }
+.s-desc-2 { height: 14px; width: 80%; }
