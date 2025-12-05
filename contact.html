@@ -3,32 +3,187 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Contact</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <title>Contact — Lochan Mahesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .contact-page { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; text-align: center; }
+      
+      /* Hero Image Style */
+      .contact-hero { 
+        width: 280px; 
+        height: auto; 
+        display: block; 
+        margin: 20px auto 30px; 
+        border-radius: 12px; 
+      }
+      
+      .contact-title { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.2; font-weight: 800; margin: 16px 0 10px; letter-spacing: -0.02em; }
+      
+      /* Social Button Styles */
+      .contact-socials { 
+        list-style: none; 
+        display: flex; 
+        gap: 20px; 
+        justify-content: center; 
+        padding: 0; 
+        margin: 40px 0 0; 
+        flex-wrap: wrap;
+      }
+      
+      .social-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: var(--gray-500);
+        transition: color 0.2s ease;
+      }
+
+      .social-link:hover {
+        color: var(--fg);
+      }
+
+      .social-icon-circle {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 1px solid var(--gray-100);
+        background: var(--bg);
+        display: grid;
+        place-items: center;
+        margin-bottom: 12px;
+        transition: all 0.2s ease;
+        color: var(--fg);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+
+      .social-link:hover .social-icon-circle {
+        border-color: var(--fg);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+
+      .social-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+    </style>
   </head>
   <body>
+    
     <header class="site-header">
-      <nav>
-        <ul class="nav__list">
-          <li><a href="index.html" class="nav__link">home</a></li>
-          <li><a href="index.html#projects" class="nav__link">blog</a></li>
-          <li><a href="contact.html" class="nav__link">contact</a></li>
-        </ul>
+      <nav class="nav">
+        <a href="index.html" class="nav-logo">
+          <svg class="logo-svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Lochan</span>
+        </a>
+
+        <div class="nav-right">
+          <ul class="nav__list">
+            <li><a href="index.html" class="nav__link">Overview</a></li>
+            <li><a href="index.html#projects" class="nav__link">Projects</a></li>
+            <li><a href="contact.html" class="nav__link active">Contact</a></li>
+          </ul>
+
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+            <svg id="sun-icon" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg id="moon-icon" class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
       </nav>
     </header>
 
-    <main class="container" style="text-align:center; max-width:600px; margin-top:40px;">
-      <h1 class="hero__title">Contact Me</h1>
-      <p class="bio" style="margin-bottom: 40px;">
-        Feel free to reach out on any of these platforms.
-      </p>
+    <main class="contact-page">
+      <img class="contact-hero" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzM5cG4yamlpdGw0NDd6bmo4ZTc1Nmd4bTYwc3JiamI1N2hqN3VtYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SklfP8y3V40ycCzVjW/giphy.gif" alt="Waving Hello" />
       
-      <div style="display:flex; justify-content:center; gap:20px;">
-        <a href="https://github.com/lochan-m05" class="nav__link">GitHub</a>
-        <a href="https://linkedin.com" class="nav__link">LinkedIn</a>
-        <a href="https://x.com" class="nav__link">Twitter/X</a>
+      <h1 class="contact-title">
+        Don't be a stranger give a wave and say hi! 
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Waving%20Hand.png" alt="Wave" width="40" height="40" style="vertical-align: bottom;">
+      </h1>
+
+      <div class="contact-socials">
+          
+        <a href="https://github.com/lochan-m05" target="_blank" class="social-link">
+          <div class="social-icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          </div>
+          <span class="social-label">GitHub</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/lochan-mahesh-b3b7342b6/" target="_blank" class="social-link">
+          <div class="social-icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </div>
+          <span class="social-label">LinkedIn</span>
+        </a>
+
+        <a href="https://x.com/Lochan_m05" target="_blank" class="social-link">
+          <div class="social-icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+          </div>
+          <span class="social-label">Twitter</span>
+        </a>
+
+        <a href="https://discord.gg/BYPHCC4m" target="_blank" class="social-link">
+          <div class="social-icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1432-.1064.2868-.2132.4233-.3225a.076.076 0 00.0277-.0767c3.9458 1.8023 8.1966 1.8023 12.1026 0a.076.076 0 00.0277.0767c.1365.1093.28.216.4233.3225a.077.077 0 01-.0076.1277c-.5979.3428-1.2194.6447-1.8723.8923a.0756.0756 0 00-.0416.1057c.3529.699.7644 1.3638 1.225 1.9942a.0776.0776 0 00.0842.0276c1.9383-.6066 3.9268-1.5218 5.9928-3.0294a.077.077 0 00.0313-.0561c.693-4.4779-.1605-9.012-3.1388-13.6604a.061.061 0 00-.032-.0277zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419z"/>
+            </svg>
+          </div>
+          <span class="social-label">Discord</span>
+        </a>
+
       </div>
     </main>
+
+    <footer class="site-footer">
+      <p>MIT Licensed • Copyright © <span id="year"></span> Lochan Mahesh</p>
+    </footer>
+
+    <script>
+      const themeBtn = document.getElementById('theme-toggle');
+      const sunIcon = document.getElementById('sun-icon');
+      const moonIcon = document.getElementById('moon-icon');
+      const body = document.body;
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        body.setAttribute('data-theme', 'light');
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+      themeBtn.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+          body.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'dark');
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          body.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+      });
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
