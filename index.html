@@ -25,6 +25,7 @@
       
       <section class="hero">
         <img class="hero__image" src="https://github.com/lochan-m05.png" alt="Profile" />
+        
         <h1 class="hero__title">Lochan Mahesh</h1>
         <p class="hero__subtitle">Cybersecurity Student & Developer</p>
 
@@ -67,8 +68,21 @@
         const username = 'lochan-m05'; 
         const grid = document.getElementById('repo-grid');
         
-        // --- STEP 1: Show Skeleton Loading State ---
-        // This ensures the user sees something immediately
+        // --- CONFIGURATION: YOUR PINNED REPOS ---
+        // exact names of the repos you want to show (case-sensitive)
+        const pinnedRepoNames = [
+          "instagrambot",
+          "Everything-Blog",
+          "youtube-shorts-automation",
+          "DownloadsManeger",
+          "yahoo-finance-api",
+          "NewsLetterBot",
+          "twitter-bot",
+          "promptly-plugin",
+          "PodcastScraper"
+        ];
+
+        // Show Skeleton Loading
         grid.innerHTML = '';
         for(let i=0; i<6; i++) {
           grid.innerHTML += `
@@ -81,40 +95,51 @@
         }
 
         try {
-          // --- STEP 2: Fetch Data ---
-          // Added 'sort=pushed' to get your latest work
-          const res = await fetch(`https://api.github.com/users/${username}/repos?sort=pushed&per_page=12`);
+          // Fetch up to 100 repos to ensure we find the pinned ones
+          const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`);
           
           if (!res.ok) {
             if(res.status === 403) throw new Error('Rate limit exceeded');
             throw new Error('GitHub API error');
           }
           
-          const repos = await res.json();
+          const allRepos = await res.json();
           
+          // --- FILTERING LOGIC ---
+          // Keep only the repos that are in your 'pinnedRepoNames' list
+          const pinnedRepos = allRepos.filter(repo => 
+            pinnedRepoNames.includes(repo.name)
+          );
+
+          // Sort them to match the order you listed them in 'pinnedRepoNames'
+          pinnedRepos.sort((a, b) => {
+            return pinnedRepoNames.indexOf(a.name) - pinnedRepoNames.indexOf(b.name);
+          });
+
           // Clear Skeletons
           grid.innerHTML = '';
 
-          // Filter out forks if you want (optional: remove !r.fork to show everything)
-          // const filtered = repos.filter(r => !r.fork); 
-          // Currently showing all sorted by update time
-          const sorted = repos.sort((a,b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+          // Render Cards
+          if (pinnedRepos.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; width:100%;">No pinned repositories found. Check your spellings in the code!</p>';
+            return;
+          }
 
-          // --- STEP 3: Render Real Cards ---
-          sorted.forEach(repo => {
+          pinnedRepos.forEach(repo => {
             const article = document.createElement('a');
             article.href = repo.html_url;
             article.target = "_blank";
             article.className = 'card';
             
-            // Language Color Map
+            // Language Colors
             const langColors = {
               'Python': '#3572A5',
               'JavaScript': '#f1e05a',
               'HTML': '#e34c26',
               'CSS': '#563d7c',
               'Rust': '#dea584',
-              'C++': '#f34b7d'
+              'C++': '#f34b7d',
+              'Dart': '#00B4AB'
             };
             const langColor = langColors[repo.language] || '#ccc';
             const lang = repo.language || 'Code';
