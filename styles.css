@@ -1,10 +1,11 @@
 :root {
   --bg: #ffffff;
-  --text: #111111;
-  --text-muted: #666666;
-  --border: #e5e5e5;
-  --card-hover: #fafafa;
-  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --text-main: #111827;       /* Nearly black for titles */
+  --text-muted: #6b7280;      /* Gray for descriptions */
+  --border: #e5e7eb;          /* Tailwind gray-200 */
+  --card-bg: #ffffff;
+  --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -13,190 +14,170 @@ body {
   margin: 0;
   font-family: var(--font-main);
   background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  color: var(--text-main);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
-
+/* --- Navigation --- */
 .site-header {
-  padding: 20px 0;
+  padding: 1.5rem 0;
   text-align: center;
-  background: var(--bg);
- 
-  position: sticky; 
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(5px);
-  background: rgba(255,255,255,0.9);
+  margin-bottom: 2rem;
 }
-
 .nav__list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  gap: 24px;
 }
-
 .nav__link {
   text-decoration: none;
-  color: var(--text);
+  color: var(--text-main);
   font-weight: 500;
   font-size: 0.95rem;
 }
+.nav__link:hover { color: #000; text-decoration: underline; }
 
-.nav__link:hover { text-decoration: underline; }
-
-/* Main Container */
+/* --- Layout --- */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px 100px;
+  padding: 0 20px 80px;
 }
 
-/* Hero Section - Centered Stack */
+/* --- Hero Section --- */
 .hero {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 5rem;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
-
 .hero__image {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
-  border-radius: 12px; /* Slightly rounded square as seen in image */
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
-
 .hero__title {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 800;
-  margin: 0 0 8px;
-  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.025em;
 }
-
 .hero__subtitle {
   color: var(--text-muted);
   font-size: 1.1rem;
-  margin: 0 0 30px;
-  font-weight: 400;
+  margin: 0 0 2rem;
 }
-
-/* Tech Stack Grid (Mini icons under name) */
+/* Tech Stack Row */
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px 30px;
-  margin-bottom: 40px;
-  font-size: 0.9rem;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
   font-weight: 600;
-  color: var(--text);
+  font-size: 0.9rem;
 }
+.tech-item { display: flex; align-items: center; gap: 6px; }
 
-.tech-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.bio {
-  color: var(--text-muted);
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-/* Projects Masonry Layout */
+/* --- Masonry Project Grid --- */
 .section-title {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin: 60px 0 40px;
-  color: var(--text-muted); /* Grayish title as per screenshot */
+  color: #6b7280; /* Gray title as seen in screenshot */
+  margin-bottom: 3rem;
 }
 
-/* The Masonry Magic */
-.grid {
-  column-count: 1; /* Default mobile */
-  column-gap: 20px;
+/* The Masonry Columns */
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1.5rem;
 }
+@media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+@media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
 
-@media (min-width: 768px) {
-  .grid { column-count: 2; }
-}
-
-@media (min-width: 1024px) {
-  .grid { column-count: 3; }
-}
-
+/* The Card Style */
 .card {
-  background: #fff;
+  background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 20px;
-  break-inside: avoid; 
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 0.75rem; /* 12px radius */
+  padding: 1.5rem;
+  margin-bottom: 1.5rem; /* Bottom space for masonry flow */
+  break-inside: avoid;   /* Prevents cutting cards in half */
+  
+  /* The "Effect" */
+  transition: all 0.2s ease;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
 
+/* Hover Effect: Lift up + Shadow */
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transform: translateY(-4px);
+  box-shadow: var(--hover-shadow);
   border-color: #d1d5db;
 }
 
 .card__title {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin: 0 0 10px;
+  margin: 0 0 0.75rem;
   color: #000;
+  line-height: 1.3;
 }
 
 .card__desc {
   font-size: 0.95rem;
   color: var(--text-muted);
-  margin-bottom: 24px;
-  line-height: 1.5;
+  margin: 0 0 2rem; /* Spacing before footer */
+  line-height: 1.6;
 }
 
+/* Footer layout: Language ... Date ... Icon */
 .card__meta {
   margin-top: auto;
+  padding-top: 1rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
-  color: #999;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #9ca3af; /* Light gray text */
 }
 
-.card__lang {
+.meta-left {
   display: flex;
   align-items: center;
   gap: 6px;
-}
-
-/* Dot for language color */
-.lang-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #333;
-}
-
-.icon { width: 18px; height: 18px; fill: currentColor; }
-.hero-icon { width: 16px; height: 16px; fill: currentColor; }
-
-/* Footer */
-.site-footer {
-  text-align: center;
-  padding: 40px;
+  font-weight: 500;
   color: var(--text-muted);
-  font-size: 0.9rem;
 }
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: #eab308; /* Yellow dot for Python default */
+  border-radius: 50%;
+}
+
+.meta-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gh-icon {
+  color: var(--text-muted);
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  transition: color 0.2s;
+}
+.card:hover .gh-icon { color: #000; }
