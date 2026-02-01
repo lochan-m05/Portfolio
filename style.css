@@ -24,13 +24,6 @@
   --gray-700: #52525B;
   --accent: #000;
 }
-/* Add to the bottom of style.css */
-@media (max-width: 768px) {
-  /* Hide the text links on mobile to prevent collision */
-  .nav__list {
-    display: none;
-  }
-}
 
 * { box-sizing: border-box; }
 
