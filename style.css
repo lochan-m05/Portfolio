@@ -372,3 +372,9 @@ body:not([data-theme="light"]) .hero__title {
   font-size: 0.9rem;
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .nav__list {
+    display: none;
+  }
+}
